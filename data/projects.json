@@ -1,0 +1,16 @@
+[
+  {
+    "title": "İTÜ Web Karargâhı",
+    "description": "Sıfır dış bağımlılıklı, yüksek performanslı ve taşınabilir kişisel web mimarisi.",
+    "tags": ["Arch Linux", "Python", "Make", "Semantic HTML5", "CSS3"],
+    "status": "Aktif / Canlı",
+    "url": "https://web.itu.edu.tr/usluy26/"
+  },
+  {
+    "title": "Linux Sistem & Ağ Tanılama Araçları",
+    "description": "Kurumsal ağlarda (eduroam) 802.1X, DoT ve DNS sorunlarını tespit eden tanı betikleri.",
+    "tags": ["Bash", "Networking", "systemd-resolved", "Security"],
+    "status": "Tamamlandı",
+    "url": "#"
+  }
+]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} | {{NAME}} @ İTÜ</title>
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css">
+</head>
+<body>
+    <div class="shell">
+        <header class="header">
+            <div class="brand">
+                <a href="{{BASE_PATH}}index.html" class="logo">
+                    <span class="prompt">$</span> {{NAME}}<span class="cursor">_</span>
+                </a>
+                <span class="badge">{{STATUS}}</span>
+            </div>
+            <nav class="nav">
+                <a href="{{BASE_PATH}}index.html" class="{{NAV_HOME}}">[0] Karargâh</a>
+                <a href="{{BASE_PATH}}projeler/index.html" class="{{NAV_PROJ}}">[1] Projeler</a>
+                <a href="{{BASE_PATH}}notlar/index.html" class="{{NAV_NOTLAR}}">[2] Notlar</a>
+                <a href="{{BASE_PATH}}kimlik/index.html" class="{{NAV_KIMLIK}}">[3] Kimlik</a>
+            </nav>
+        </header>
+
+        <main class="content">
+            {{CONTENT}}
+        </main>
+
+        <footer class="footer">
+            <div class="footer-meta">
+                <span>{{OS}}</span> • <span>{{HOST}}</span>
+            </div>
+            <div class="footer-copy">
+                {{YEAR}} © {{NAME}} — İTÜ BİDB Altyapısı üzerinde Permacomputing Felsefesiyle Üretilmiştir.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
