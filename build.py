@@ -47,12 +47,19 @@ def main():
     # 3. Statik Kaynakları (CSS / IMG) Taşı
     shutil.copytree(SRC_DIR / "assets", DIST_DIR / "assets")
 
-    # 4. Sayfaları Derle (Strict Relative Paths)
+    # 4. Kök Dosyaları Kopyala (.htaccess ve robots.txt)
+    if (SRC_DIR / ".htaccess").exists():
+        shutil.copy(SRC_DIR / ".htaccess", DIST_DIR / ".htaccess")
+    if (SRC_DIR / "robots.txt").exists():
+        shutil.copy(SRC_DIR / "robots.txt", DIST_DIR / "robots.txt")
+
+    # 5. Sayfaları Derle (Strict Relative Paths)
     pages = [
         {"file": "index.html", "out": DIST_DIR / "index.html", "title": "Karargâh", "base": "./", "nav": "NAV_HOME"},
         {"file": "projeler.html", "out": DIST_DIR / "projeler" / "index.html", "title": "Projeler", "base": "../", "nav": "NAV_PROJ"},
         {"file": "notlar.html", "out": DIST_DIR / "notlar" / "index.html", "title": "Notlar", "base": "../", "nav": "NAV_NOTLAR"},
         {"file": "kimlik.html", "out": DIST_DIR / "kimlik" / "index.html", "title": "Kimlik", "base": "../", "nav": "NAV_KIMLIK"},
+        {"file": "404.html", "out": DIST_DIR / "404.html", "title": "404 Bulunamadı", "base": "./", "nav": ""},
     ]
 
     for p in pages:
@@ -87,7 +94,7 @@ def main():
             f.write(rendered)
 
     duration = (datetime.now() - start_time).total_seconds() * 1000
-    print(f">>> [BUILD] Başarılı! Tüm sayfalar {duration:.2f} ms içinde derlendi -> dist/")
+    print(f">>> [BUILD] Başarılı! Tüm sayfalar ve güvenlik dosyaları {duration:.2f} ms içinde derlendi -> dist/")
 
 if __name__ == "__main__":
     main()

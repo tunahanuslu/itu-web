@@ -1,0 +1,50 @@
+# ==============================================================================
+# İTÜ Web Karargâhı - Sunucu Sertleştirme ve Güvenlik Yapılandırması
+# ==============================================================================
+
+# 1. Dizin Gezinmesini (Directory Listing) Kesin Olarak Kapat
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# 2. Güvenlik Başlıkları (Security Headers)
+<IfModule mod_headers.c>
+    # Tıklama Korsanlığı (Clickjacking) Koruması
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # MIME Türü Sahteciliği (Sniffing) Koruması
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Gizlilik Odaklı Referrer Politikası
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Gereksiz Donanım Yetkilerini Kapat
+    Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+
+    # HTML Dosyaları: Asla önbelleğe alma (Değişiklikler anında yansısın)
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+
+    # Statik Varlıklar (CSS, SVG, WOFF2): 1 Hafta Önbellekle (Yüksek Hız)
+    <FilesMatch "\.(css|svg|woff2|ico)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+</IfModule>
+
+# 3. Hassas Dosyalara Doğrudan Erişimi Yasakla (403 Forbidden)
+# (.git, .env, .py, .sh, .json, .md ve yedek dosyaları)
+<FilesMatch "(^\.|\.(bak|config|sql|ini|log|sh|py|md)$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 4. Şık Özel 404 Sayfası
+ErrorDocument 404 /usluy26/404.html
