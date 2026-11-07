@@ -218,19 +218,19 @@
         color: var(--text-muted);
     }
 
-    .footer-links {
+    .footer-nav {
         display: flex;
         gap: 1.25rem;
         flex-wrap: wrap;
     }
 
-    .footer-links a {
+    .footer-nav a {
         color: var(--text);
         text-decoration: none;
         transition: color 0.15s ease;
     }
 
-    .footer-links a:hover {
+    .footer-nav a:hover {
         color: var(--accent);
     }
 
