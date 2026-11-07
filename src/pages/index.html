@@ -1,37 +1,62 @@
-<section class="hero">
-    <h1>Mühendislik, Sistemler ve Yazılım.</h1>
-    <p class="lead">İstanbul Teknik Üniversitesi'nde öğrenci; açık kaynak felsefesine ve derin sistem mimarilerine tutkulu bir geliştirici.</p>
-</section>
-
 <section class="section">
-    <div class="section-header">
-        <h2>Sistem Metrikleri</h2>
-        <span class="section-tag">telemetry</span>
-    </div>
-    <div class="grid grid-2">
-        <div class="card">
-            <span class="card-label">İşletim Sistemi</span>
-            <span class="card-val">{{OS}}</span>
-        </div>
-        <div class="card">
-            <span class="card-label">Konum / Ağ</span>
-            <span class="card-val">{{INSTITUTION}} (eduroam)</span>
-        </div>
-        <div class="card">
-            <span class="card-label">Protokol Desteği</span>
-            <span class="card-val">IPv4 / IPv6 / DNS-over-TLS</span>
-        </div>
-        <div class="card">
-            <span class="card-label">Yayın Durumu</span>
-            <span class="card-val text-green">● {{STATUS}}</span>
-        </div>
+    <div class="prose">
+        <p>
+            İstanbul Teknik Üniversitesi Tekstil Teknolojileri ve Tasarımı Fakültesi'nde öğrenciyim. 
+            Malzeme bilimi ve dokuma strüktürlerindeki zanaat disipliniyle; Linux sistem mimarisi, ağ protokolleri ve bağımsız web standartlarını kesiştiren bir düşünce ve çalışma alanındasınız.
+        </p>
+        <p>
+            Bu alan; görsel gürültüden arındırılmış, dış bağımlılığı olmayan (&lt;10 KB) ve düşüncelerin doğrudan metin olarak aktığı kişisel bir dijital çalışma masasıdır.
+        </p>
     </div>
 </section>
 
 <section class="section">
-    <div class="section-header">
-        <h2>Öne Çıkan Çalışmalar</h2>
-        <a href="{{BASE_PATH}}projeler/index.html" class="link-more">Tüm Projeler →</a>
+    <h2 class="section-title">Sistemler & Çalışmalar</h2>
+    <div class="entry-list">
+        <article class="entry">
+            <div class="entry-header">
+                <a href="https://web.itu.edu.tr/usluy26/" class="entry-link">İTÜ Web Alanı Mimarisi ↗</a>
+                <span class="entry-meta">Canlı / Aktif</span>
+            </div>
+            <p class="entry-desc">
+                Sıfır dış bağımlılıklı, sub-14KB tekil TCP paketi hedefli, modern OKLCH renk uzayını ve W3C Speculation Rules standardını kullanan kişisel web altyapısı.
+            </p>
+            <div class="tags">
+                <span class="tag">Arch Linux</span>
+                <span class="tag">Apache</span>
+                <span class="tag">Python 3.14</span>
+                <span class="tag">OKLCH CSS</span>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="entry-link">Linux Ağ & Sistem Tanılama Araçları</span>
+                <span class="entry-meta">2026</span>
+            </div>
+            <p class="entry-desc">
+                Kurumsal ağlarda (eduroam) 802.1X yetkilendirme, DoT (DNS-over-TLS) ve rota sorunlarını tespit eden POSIX uyumlu kabuk betikleri.
+            </p>
+            <div class="tags">
+                <span class="tag">Bash</span>
+                <span class="tag">Networking</span>
+                <span class="tag">systemd-resolved</span>
+            </div>
+        </article>
     </div>
-    {{FEATURED_PROJECTS}}
+</section>
+
+<section class="section">
+    <h2 class="section-title">Saha Notları</h2>
+    <div class="entry-list">
+        <article class="entry">
+            <div class="entry-header">
+                <span class="entry-link">Dokuma Tezgâhından Konsola: Strüktür ve Sistem Analojisi</span>
+                <span class="entry-meta">Taslak</span>
+            </div>
+            <p class="entry-desc">
+                Çözgü ve atkı ipliklerinin kurduğu gerilim dengesi ile Unix felsefesindeki modülerlik ve boru hattı mimarisinin estetik kesişimi üzerine bir not.
+            </p>
+        </article>
+    </div>
 </section>

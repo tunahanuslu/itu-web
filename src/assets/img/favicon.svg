@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    text { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+    .prompt { fill: #0284c7; }
+    .cursor { fill: #0284c7; }
+    @media (prefers-color-scheme: dark) {
+      .prompt { fill: #38bdf8; }
+      .cursor { fill: #38bdf8; }
+    }
+  </style>
+  <text x="2" y="24" font-size="22" class="prompt">$</text>
+  <text x="16" y="24" font-size="22" class="cursor">_</text>
+</svg>

@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{TITLE}} | {{NAME}} @ İTÜ</title>
+    <meta name="color-scheme" content="light dark">
+    <title>{{PAGE_TITLE}}</title>
+    <link rel="icon" type="image/svg+xml" href="{{BASE_PATH}}assets/img/favicon.svg">
     <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css">
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["{{BASE_PATH}}index.html"]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="shell">
         <header class="header">
-            <div class="brand">
-                <a href="{{BASE_PATH}}index.html" class="logo">
-                    <span class="prompt">$</span> {{NAME}}<span class="cursor">_</span>
-                </a>
-                <span class="badge">{{STATUS}}</span>
-            </div>
-            <nav class="nav">
-                <a href="{{BASE_PATH}}index.html" class="{{NAV_HOME}}">[0] Karargâh</a>
-                <a href="{{BASE_PATH}}projeler/index.html" class="{{NAV_PROJ}}">[1] Projeler</a>
-                <a href="{{BASE_PATH}}notlar/index.html" class="{{NAV_NOTLAR}}">[2] Notlar</a>
-                <a href="{{BASE_PATH}}kimlik/index.html" class="{{NAV_KIMLIK}}">[3] Kimlik</a>
-            </nav>
+            <a href="{{BASE_PATH}}index.html" class="brand" aria-label="Yusuf Tunahan Ana Sayfa">
+                <span class="prompt">$</span>Yusuf Tunahan<span class="cursor">_</span>
+            </a>
+            <div class="header-meta">İTÜ • Tekstil Mühendisliği</div>
         </header>
 
         <main class="content">
@@ -28,11 +32,13 @@
         </main>
 
         <footer class="footer">
-            <div class="footer-meta">
-                <span>{{OS}}</span> • <span>{{HOST}}</span>
+            <div class="footer-links">
+                <a href="mailto:usluy26@itu.edu.tr">usluy26@itu.edu.tr</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">github ↗</a>
+                <a href="https://web.itu.edu.tr/usluy26/">web.itu.edu.tr/usluy26</a>
             </div>
-            <div class="footer-copy">
-                {{YEAR}} © {{NAME}} — İTÜ BİDB Altyapısı üzerinde Permacomputing Felsefesiyle Üretilmiştir.
+            <div class="footer-colophon">
+                {{YEAR}} © Yusuf Tunahan — Sıfır dış bağımlılık ve permacomputing ilkeleriyle üretilmiştir.
             </div>
         </footer>
     </div>
