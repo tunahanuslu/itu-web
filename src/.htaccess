@@ -1,5 +1,5 @@
 # ==============================================================================
-# İTÜ Web Alanı - Sunucu Sertleştirme ve Yüksek Performans Yapılandırması
+# İTÜ Web Alanı - Askeri Düzey Sunucu Sertleştirme ve Yüksek Performans
 # ==============================================================================
 
 # 1. Dizin Gezinmesini (Directory Listing) Kesin Olarak Kapat
@@ -7,7 +7,10 @@
     Options -Indexes
 </IfModule>
 
-# 2. GZIP / DEFLATE Sıkıştırması (Ağ Trafiğini %70-80 Azaltır)
+# 2. İTÜ NFS Depolama Kümesinde ETag Tutarlılığı (INode Bağımlılığını Kaldır)
+FileETag MTime Size
+
+# 3. GZIP / DEFLATE Sıkıştırması (Ağ Trafiğini %70-80 Azaltır)
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
     AddOutputFilterByType DEFLATE application/javascript application/json application/xml
@@ -15,7 +18,7 @@
     Header append Vary Accept-Encoding
 </IfModule>
 
-# 3. Güvenlik Başlıkları (Security Headers)
+# 4. Güvenlik ve İzolasyon Başlıkları (Zero-Trust Security Headers)
 <IfModule mod_headers.c>
     # Tıklama Korsanlığı (Clickjacking) Koruması
     Header set X-Frame-Options "SAMEORIGIN"
@@ -28,6 +31,14 @@
     
     # Donanım Yetkilerini Kapat
     Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+
+    # Tarayıcı Süreç Bellek İzolasyonu (COOP & CORP)
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header set Cross-Origin-Resource-Policy "same-origin"
+    Header set X-Permitted-Cross-Domain-Policies "none"
+
+    # CSP Level 3: Sıfır Dış Kaynak, Tam İzolasyon
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self';"
 
     # HTML Dosyaları: Asla önbelleğe alma (Değişiklikler anında yansısın)
     <FilesMatch "\.(html|htm)$">
@@ -42,7 +53,7 @@
     </FilesMatch>
 </IfModule>
 
-# 4. Hassas Dosyalara Doğrudan Erişimi Yasakla (403 Forbidden)
+# 5. Hassas Dosyalara Doğrudan Erişimi Yasakla (403 Forbidden)
 <FilesMatch "(^\.|\.(bak|config|sql|ini|log|sh|py|md)$)">
     <IfModule mod_authz_core.c>
         Require all denied
@@ -53,5 +64,5 @@
     </IfModule>
 </FilesMatch>
 
-# 5. Özel 404 Sayfası (Alt Dizin Uyumlu)
+# 6. Özel 404 Sayfası (Alt Dizin Uyumlu)
 ErrorDocument 404 /usluy26/404.html
