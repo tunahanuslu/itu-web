@@ -239,3 +239,132 @@
         line-height: 1.5;
     }
 }
+
+/* ==============================================================================
+   MATBAA VE AKADEMİK BASKI MİMARİSİ (W3C Paged Media / PDF Çıktısı)
+   ============================================================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 18mm 20mm;
+    }
+
+    *, *::before, *::after {
+        background: transparent !important;
+        color: #111 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    html, body {
+        font-size: 10pt;
+        line-height: 1.55;
+        background: #fff !important;
+        color: #111 !important;
+    }
+
+    .shell {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .header {
+        border-bottom: 1.5pt solid #111;
+        padding-bottom: 10pt;
+        margin-bottom: 20pt;
+    }
+
+    .brand {
+        font-size: 14pt;
+        color: #111 !important;
+    }
+
+    .brand .prompt {
+        color: #111 !important;
+    }
+
+    .brand .cursor {
+        display: none !important;
+    }
+
+    .header-meta {
+        font-size: 8.5pt;
+        color: #333 !important;
+        font-weight: 600;
+    }
+
+    .content {
+        gap: 20pt;
+    }
+
+    .section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        gap: 10pt;
+    }
+
+    .section-title {
+        border-bottom: 0.75pt solid #333;
+        color: #111 !important;
+        font-size: 8.5pt;
+        padding-bottom: 3pt;
+    }
+
+    .entry {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        gap: 3pt;
+    }
+
+    .entry-link {
+        color: #111 !important;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    /* Kâğıt üzerinde dış bağlantıların gerçek URL'sini dipnot gibi yazdır */
+    .entry-link[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 7.5pt;
+        color: #555 !important;
+        font-weight: normal;
+    }
+
+    .tags {
+        gap: 3pt;
+        margin-top: 2pt;
+    }
+
+    .tag {
+        border: 0.5pt solid #888;
+        background: transparent !important;
+        color: #222 !important;
+        font-size: 7pt;
+        padding: 1pt 4pt;
+    }
+
+    .footer {
+        margin-top: 25pt;
+        border-top: 1pt solid #222;
+        padding-top: 10pt;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        gap: 6pt;
+        font-size: 8pt;
+    }
+
+    .footer-nav {
+        gap: 12pt;
+    }
+
+    .footer-nav a {
+        color: #111 !important;
+        text-decoration: none;
+    }
+
+    .footer-colophon {
+        color: #444 !important;
+        font-size: 7.5pt;
+    }
+}
