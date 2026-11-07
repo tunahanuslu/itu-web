@@ -246,7 +246,7 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 12mm 16mm 14mm 16mm;
+        margin: 10mm 15mm 10mm 15mm;
     }
 
     *, *::before, *::after {
@@ -257,8 +257,8 @@
     }
 
     html, body {
-        font-size: 9.5pt;
-        line-height: 1.55;
+        font-size: 9pt;
+        line-height: 1.45;
         background: #fff !important;
         color: #111 !important;
     }
@@ -270,51 +270,44 @@
     }
 
     .header {
-        border-bottom: 1.5pt solid #111;
-        padding-bottom: 10pt;
-        margin-bottom: 20pt;
+        border-bottom: 1.2pt solid #111;
+        padding-bottom: 6pt;
+        margin-bottom: 12pt;
     }
 
     .brand {
-        font-size: 14pt;
+        font-size: 13pt;
         color: #111 !important;
     }
 
-    .brand .prompt {
-        color: #111 !important;
-    }
-
-    .brand .cursor {
-        display: none !important;
-    }
+    .brand .prompt { color: #111 !important; }
+    .brand .cursor { display: none !important; }
 
     .header-meta {
-        font-size: 8.5pt;
+        font-size: 8pt;
         color: #333 !important;
         font-weight: 600;
     }
 
-    .content {
-        gap: 16pt;
-    }
+    .content { gap: 12pt; }
 
     .section {
         break-inside: avoid;
         page-break-inside: avoid;
-        gap: 10pt;
+        gap: 6pt;
     }
 
     .section-title {
         border-bottom: 0.75pt solid #333;
         color: #111 !important;
-        font-size: 8.5pt;
-        padding-bottom: 3pt;
+        font-size: 8pt;
+        padding-bottom: 2pt;
     }
 
     .entry {
         break-inside: avoid;
         page-break-inside: avoid;
-        gap: 3pt;
+        gap: 2pt;
     }
 
     .entry-link {
@@ -323,48 +316,34 @@
         text-decoration: none;
     }
 
-    /* Kâğıt üzerinde dış bağlantıların gerçek URL'sini dipnot gibi yazdır */
     .entry-link[href^="http"]::after {
         content: " (" attr(href) ")";
-        font-size: 7.5pt;
+        font-size: 7pt;
         color: #555 !important;
         font-weight: normal;
     }
 
-    .tags {
-        gap: 3pt;
-        margin-top: 2pt;
-    }
+    .tags { gap: 2.5pt; margin-top: 1pt; }
 
     .tag {
         border: 0.5pt solid #888;
         background: transparent !important;
         color: #222 !important;
-        font-size: 7pt;
-        padding: 1pt 4pt;
+        font-size: 6.5pt;
+        padding: 1pt 3pt;
     }
 
     .footer {
-        margin-top: 18pt;
-        border-top: 1pt solid #222;
-        padding-top: 10pt;
+        margin-top: 14pt;
+        border-top: 0.75pt solid #222;
+        padding-top: 6pt;
         break-inside: avoid;
         page-break-inside: avoid;
-        gap: 6pt;
-        font-size: 8pt;
-    }
-
-    .footer-nav {
-        gap: 12pt;
-    }
-
-    .footer-nav a {
-        color: #111 !important;
-        text-decoration: none;
-    }
-
-    .footer-colophon {
-        color: #444 !important;
+        gap: 4pt;
         font-size: 7.5pt;
     }
+
+    .footer-nav { gap: 10pt; }
+    .footer-nav a { color: #111 !important; text-decoration: none; }
+    .footer-colophon { color: #444 !important; font-size: 7pt; }
 }

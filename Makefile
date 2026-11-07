@@ -27,3 +27,6 @@ deploy: build
 clean:
 	@rm -rf dist
 	@echo ">>> dist/ temizlendi."
+
+audit: build
+	@python3 audit.py
