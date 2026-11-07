@@ -5,14 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <title>{{PAGE_TITLE}}</title>
-    <link rel="icon" type="image/svg+xml" href="{{BASE_PATH}}assets/img/favicon.svg?v=2.1">
-    <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css?v=2.2">
+    <link rel="icon" type="image/svg+xml" href="{{BASE_PATH}}assets/img/favicon.svg?v=2.3">
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css?v=2.3">
+    
+    <!-- W3C Speculation Rules API (0 ms Algılanan Gecikme) -->
     <script type="speculationrules">
     {
       "prerender": [
         {
           "source": "list",
           "urls": ["{{BASE_PATH}}index.html"]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema.org Semantik Web ve Yapay Zeka Veri Grafı (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://web.itu.edu.tr/usluy26/#person",
+          "name": "Yusuf Tunahan",
+          "alternateName": "Yusuf Uslu",
+          "url": "https://web.itu.edu.tr/usluy26/",
+          "email": "usluy26@itu.edu.tr",
+          "jobTitle": "Tekstil Mühendisliği Öğrencisi",
+          "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "İstanbul Teknik Üniversitesi",
+            "sameAs": "https://www.itu.edu.tr"
+          },
+          "knowsAbout": [
+            "Textile Engineering",
+            "Linux System Architecture",
+            "Web Standards",
+            "Network Protocols",
+            "Permacomputing"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://web.itu.edu.tr/usluy26/#website",
+          "url": "https://web.itu.edu.tr/usluy26/",
+          "name": "Yusuf Tunahan",
+          "publisher": {
+            "@id": "https://web.itu.edu.tr/usluy26/#person"
+          },
+          "inLanguage": "tr"
         }
       ]
     }

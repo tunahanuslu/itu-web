@@ -246,7 +246,7 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 18mm 20mm;
+        margin: 12mm 16mm 14mm 16mm;
     }
 
     *, *::before, *::after {
@@ -257,7 +257,7 @@
     }
 
     html, body {
-        font-size: 10pt;
+        font-size: 9.5pt;
         line-height: 1.55;
         background: #fff !important;
         color: #111 !important;
@@ -295,7 +295,7 @@
     }
 
     .content {
-        gap: 20pt;
+        gap: 16pt;
     }
 
     .section {
@@ -345,7 +345,7 @@
     }
 
     .footer {
-        margin-top: 25pt;
+        margin-top: 18pt;
         border-top: 1pt solid #222;
         padding-top: 10pt;
         break-inside: avoid;
