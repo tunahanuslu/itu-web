@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import re
 import shutil
 from pathlib import Path
 from datetime import datetime
@@ -10,25 +11,36 @@ DIST_DIR = ROOT / "dist"
 def main():
     start_time = datetime.now()
 
-    # 1. dist/ Dizinini Sıfırdan Hazırla
+    # 1. dist/ Dizinini Sıfırla
     if DIST_DIR.exists():
         shutil.rmtree(DIST_DIR)
     DIST_DIR.mkdir(parents=True)
 
-    # 2. Statik Kaynakları (CSS, Varlıklar) Kopyala
+    # 2. Statik Kaynakları Kopyala
     if (SRC_DIR / "assets").exists():
         shutil.copytree(SRC_DIR / "assets", DIST_DIR / "assets")
 
-    # 3. Kök Yapılandırmalarını Kopyala (.htaccess ve robots.txt)
+    # 3. Sıfır Bağımlılıklı Derleme Zamanı CSS Minifier
+    css_dist = DIST_DIR / "assets" / "css" / "style.css"
+    if css_dist.exists():
+        raw_css = css_dist.read_text(encoding="utf-8")
+        # Yorumları temizle
+        min_css = re.sub(r"/\*.*?\*/", "", raw_css, flags=re.DOTALL)
+        # Fazla boşlukları teke indir
+        min_css = re.sub(r"\s+", " ", min_css)
+        # Ayraç etrafındaki boşlukları sıfırla
+        min_css = re.sub(r"\s*([\{\}\:\;\,])\s*", r"\1", min_css)
+        css_dist.write_text(min_css.strip(), encoding="utf-8")
+
+    # 4. Kök Dosyaları Kopyala
     for conf in [".htaccess", "robots.txt"]:
         if (SRC_DIR / conf).exists():
             shutil.copy(SRC_DIR / conf, DIST_DIR / conf)
 
-    # 4. Şablonu Oku
+    # 5. Sayfaları Derle
     with open(SRC_DIR / "templates" / "base.html", "r", encoding="utf-8") as f:
         base_template = f.read()
 
-    # 5. Sayfaları Derle
     pages = [
         {"file": "index.html", "out": DIST_DIR / "index.html", "title": "Yusuf Tunahan", "base": "./"},
         {"file": "404.html", "out": DIST_DIR / "404.html", "title": "404 — Yusuf Tunahan", "base": "./"},
@@ -48,7 +60,7 @@ def main():
             f.write(rendered)
 
     duration = (datetime.now() - start_time).total_seconds() * 1000
-    print(f">>> [BUILD] Tamamlandı! Sayfalar {duration:.2f} ms içinde derlendi -> dist/")
+    print(f">>> [BUILD] Tamamlandı! Varlıklar ve sayfalar {duration:.2f} ms içinde derlendi -> dist/")
 
 if __name__ == "__main__":
     main()

@@ -366,3 +366,24 @@
     .footer-nav a { color: #111 !important; text-decoration: none; }
     .footer-colophon { color: #444 !important; font-size: 7pt; }
 }
+
+/* Canlı Donanım & Ağ Telemetri HUD */
+.hud-trigger { background: none; border: none; font: inherit; color: var(--text-muted); cursor: pointer; padding: 0; transition: color 0.15s; }
+.hud-trigger:hover { color: var(--accent); }
+.hud { position: fixed; bottom: 1.5rem; right: 1.5rem; width: min(360px, calc(100vw - 3rem)); background: light-dark(oklch(0.97 0.006 85 / 0.88), oklch(0.19 0.012 260 / 0.88)); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; z-index: 9999; box-shadow: 0 16px 36px oklch(0 0 0 / 0.3); opacity: 0; transform: translateY(10px) scale(0.98); pointer-events: none; transition: opacity 0.2s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.hud.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.hud-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 0.6rem; }
+.hud-title { font-weight: 700; letter-spacing: 0.04em; color: var(--text); display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; }
+.hud-dot { color: oklch(0.65 0.20 145); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hud-close { background: none; border: none; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; cursor: pointer; padding: 0.1rem 0.3rem; }
+.hud-close:hover { color: var(--accent); }
+.hud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.hud-col { display: flex; flex-direction: column; gap: 0.25rem; }
+.hud-label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); border-bottom: 1px dashed var(--border); padding-bottom: 0.15rem; margin-bottom: 0.15rem; }
+.hud-metric { display: flex; justify-content: space-between; gap: 0.4rem; }
+.hud-metric span { color: var(--text-muted); font-size: 0.7rem; }
+.hud-metric strong { color: var(--text); font-weight: 600; font-size: 0.72rem; }
+.hud-accent { color: var(--accent) !important; }
+.hud-footer { margin-top: 0.6rem; padding-top: 0.4rem; border-top: 1px solid var(--border); font-size: 0.62rem; color: var(--text-muted); text-align: center; }
+@media print { .hud, .hud-trigger { display: none !important; } }
