@@ -368,7 +368,7 @@
 }
 
 /* Canlı Donanım & Ağ Telemetri HUD */
-.hud-trigger { background: none; border: none; font: inherit; color: var(--text-muted); cursor: pointer; padding: 0; transition: color 0.15s; }
+.hud-trigger { margin-left: auto; background: none; border: none; font: inherit; color: var(--text-muted); cursor: pointer; padding: 0; transition: color 0.15s; }
 .hud-trigger:hover { color: var(--accent); }
 .hud { position: fixed; bottom: 1.5rem; right: 1.5rem; width: min(360px, calc(100vw - 3rem)); background: light-dark(oklch(0.97 0.006 85 / 0.88), oklch(0.19 0.012 260 / 0.88)); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; font-family: var(--font-mono); font-size: 0.75rem; z-index: 9999; box-shadow: 0 16px 36px oklch(0 0 0 / 0.3); opacity: 0; transform: translateY(10px) scale(0.98); pointer-events: none; transition: opacity 0.2s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .hud.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
