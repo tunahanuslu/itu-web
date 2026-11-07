@@ -20,15 +20,12 @@ def main():
     if (SRC_DIR / "assets").exists():
         shutil.copytree(SRC_DIR / "assets", DIST_DIR / "assets")
 
-    # 3. Sıfır Bağımlılıklı Derleme Zamanı CSS Minifier
+    # 3. Derleme Zamanı CSS Minifier
     css_dist = DIST_DIR / "assets" / "css" / "style.css"
     if css_dist.exists():
         raw_css = css_dist.read_text(encoding="utf-8")
-        # Yorumları temizle
         min_css = re.sub(r"/\*.*?\*/", "", raw_css, flags=re.DOTALL)
-        # Fazla boşlukları teke indir
         min_css = re.sub(r"\s+", " ", min_css)
-        # Ayraç etrafındaki boşlukları sıfırla
         min_css = re.sub(r"\s*([\{\}\:\;\,])\s*", r"\1", min_css)
         css_dist.write_text(min_css.strip(), encoding="utf-8")
 
@@ -37,7 +34,7 @@ def main():
         if (SRC_DIR / conf).exists():
             shutil.copy(SRC_DIR / conf, DIST_DIR / conf)
 
-    # 5. Sayfaları Derle
+    # 5. Sayfaları Derle & HTML Minifier
     with open(SRC_DIR / "templates" / "base.html", "r", encoding="utf-8") as f:
         base_template = f.read()
 
@@ -56,8 +53,13 @@ def main():
         rendered = rendered.replace("{{BASE_PATH}}", p["base"])
         rendered = rendered.replace("{{YEAR}}", str(datetime.now().year))
 
+        # HTML Minifier: Yorumları temizle ve etiket arası boşlukları süze
+        rendered = re.sub(r"<!--(?!\s*\[if).*?-->", "", rendered, flags=re.DOTALL)
+        rendered = re.sub(r">\s+<", "><", rendered)
+        rendered = re.sub(r"[ \t]+", " ", rendered)
+
         with open(p["out"], "w", encoding="utf-8") as f:
-            f.write(rendered)
+            f.write(rendered.strip())
 
     duration = (datetime.now() - start_time).total_seconds() * 1000
     print(f">>> [BUILD] Tamamlandı! Varlıklar ve sayfalar {duration:.2f} ms içinde derlendi -> dist/")

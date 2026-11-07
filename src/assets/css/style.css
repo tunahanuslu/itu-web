@@ -387,3 +387,20 @@
 .hud-accent { color: var(--accent) !important; }
 .hud-footer { margin-top: 0.6rem; padding-top: 0.4rem; border-top: 1px solid var(--border); font-size: 0.62rem; color: var(--text-muted); text-align: center; }
 @media print { .hud, .hud-trigger { display: none !important; } }
+
+/* MODÜL 2: Jakar Tezgâhı & Dokuma Matrisi */
+.loom-app { margin-top: 1rem; padding: 1rem; background: light-dark(oklch(0.97 0.006 85 / 0.7), oklch(0.19 0.012 260 / 0.7)); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-direction: column; gap: 0.75rem; font-family: var(--font-mono); }
+.loom-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+.loom-title { font-size: 0.72rem; font-weight: 700; color: var(--text); letter-spacing: 0.04em; }
+.loom-controls { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.loom-btn { background: none; border: 1px solid var(--border); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; padding: 0.1rem 0.45rem; border-radius: 3px; cursor: pointer; transition: all 0.15s; }
+.loom-btn:hover, .loom-btn.active { color: var(--accent); border-color: var(--accent); background: var(--accent-subtle); }
+.loom-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; max-width: 220px; width: 100%; aspect-ratio: 1; margin: 0.5rem auto; padding: 3px; background: light-dark(oklch(0.92 0.008 85), oklch(0.14 0.014 260)); border-radius: 4px; border: 1px solid var(--border); }
+.loom-cell { aspect-ratio: 1; border-radius: 1px; cursor: pointer; transition: transform 0.1s; }
+.loom-cell:hover { transform: scale(1.15); z-index: 2; }
+.loom-cell[data-state="1"] { background: var(--accent); }
+.loom-cell[data-state="0"] { background: light-dark(oklch(0.82 0.01 85), oklch(0.26 0.012 260)); }
+.loom-footer { display: flex; flex-direction: column; gap: 0.2rem; background: light-dark(oklch(0.95 0.006 85), oklch(0.16 0.012 260)); padding: 0.4rem 0.6rem; border-radius: 3px; font-size: 0.65rem; border: 1px solid var(--border); }
+.loom-meta { color: var(--text-muted); font-size: 0.62rem; }
+.loom-code { color: var(--accent); font-family: var(--font-mono); word-break: break-all; letter-spacing: 0.06em; }
+@media print { .loom-app { display: none !important; } }
