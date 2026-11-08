@@ -102,8 +102,15 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function startLoom() {
         initMatrix('plain');
         renderLoom();
-    });
+    }
+
+    // Hem ilk yüklemede hem önbellekten anında açılışta güvenli başlatma
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startLoom);
+    } else {
+        startLoom();
+    }
 })();
