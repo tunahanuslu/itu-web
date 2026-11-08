@@ -109,3 +109,60 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
     });
 }
+
+// 3D Holografik İTÜ 1773 Colophon Madalyonu Motoru
+(function() {
+    function initMedal() {
+        const root = document.getElementById('itu-seal-root');
+        if (!root) return;
+
+        root.innerHTML = `
+            <a href="https://www.itu.edu.tr" target="_blank" rel="noopener noreferrer" class="itu-medal" id="itu-medal" aria-label="İstanbul Teknik Üniversitesi 1773 Mührü">
+                <div class="itu-medal-body">
+                    <svg viewBox="0 0 100 100" class="itu-medal-svg" aria-hidden="true">
+                        <defs>
+                            <path id="seal-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"/>
+                        </defs>
+                        <circle cx="50" cy="50" r="47" class="seal-rim-outer"/>
+                        <circle cx="50" cy="50" r="43" class="seal-rim-inner"/>
+                        <text class="seal-text">
+                            <textPath href="#seal-path" startOffset="50%" text-anchor="middle">
+                                İSTANBUL TEKNİK ÜNİVERSİTESİ • 1773 •
+                            </textPath>
+                        </text>
+                        <g transform="translate(38, 33) scale(1)">
+                            <path class="seal-bee" d="M12 2a2 2 0 0 1 2 2c0 .4-.1.8-.3 1.1l1.8 1.8A7 7 0 0 1 20 11v1h-2a5 5 0 0 0-4.5-4.9l-.5 2A3 3 0 0 1 12 9a3 3 0 0 1-1-0.1l-.5-2A5 5 0 0 0 6 12H4v-1a7 7 0 0 1 4.5-4.1l1.8-1.8A2 2 0 0 1 10 4a2 2 0 0 1 2-2zm0 8a2 2 0 0 1 2 2v6a2 2 0 0 1-4 0v-6a2 2 0 0 1 2-2zm-5 4a4 4 0 0 0 3 3.9v-2.1a2 2 0 0 1-1-1.8H7zm10 0h-2a2 2 0 0 1-1 1.8v2.1a4 4 0 0 0 3-3.9z"/>
+                        </g>
+                        <text x="50" y="73" class="seal-roman" text-anchor="middle">MDCCLXXIII</text>
+                    </svg>
+                    <div class="seal-sheen" id="seal-sheen"></div>
+                </div>
+            </a>
+        `;
+
+        const medal = document.getElementById('itu-medal');
+        const sheen = document.getElementById('seal-sheen');
+        if (!medal) return;
+
+        medal.addEventListener('mousemove', (e) => {
+            const rect = medal.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            medal.style.transform = `perspective(380px) rotateX(${-y * 26}deg) rotateY(${x * 26}deg) scale3d(1.05, 1.05, 1.05)`;
+            if (sheen) {
+                sheen.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(255,255,255,0.3) 0%, transparent 60%)`;
+            }
+        });
+
+        medal.addEventListener('mouseleave', () => {
+            medal.style.transform = 'perspective(380px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            if (sheen) sheen.style.background = 'none';
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMedal);
+    } else {
+        initMedal();
+    }
+})();

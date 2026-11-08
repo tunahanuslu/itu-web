@@ -208,3 +208,26 @@
     .footer-colophon { color: #444 !important; font-size: 7pt; }
     .hud, .hud-trigger, .loom-app { display: none !important; }
 }
+
+/* İTÜ Header Mikro-Amblemi */
+.itu-header-badge { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text); text-decoration: none; transition: color 0.15s, transform 0.15s; }
+.itu-header-badge:hover { color: var(--accent); transform: scale(1.04); }
+.itu-bee { transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s; }
+.itu-header-badge:hover .itu-bee { transform: scale(1.15) rotate(-5deg); filter: drop-shadow(0 0 6px var(--accent)); }
+.itu-acronym { font-weight: 700; }
+.itu-est { font-size: 0.65rem; color: light-dark(oklch(0.48 0.14 75), oklch(0.82 0.14 75)); background: light-dark(oklch(0.48 0.14 75 / 0.1), oklch(0.82 0.14 75 / 0.15)); padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+.meta-sep { color: var(--border); }
+
+/* İTÜ 3D Holografik Colophon Madalyonu */
+.footer-seal-wrap { display: flex; justify-content: center; margin: 0.4rem 0; }
+.itu-medal { display: inline-block; cursor: pointer; text-decoration: none; border-radius: 50%; transition: transform 0.2s; }
+.itu-medal-body { position: relative; width: 72px; height: 72px; border-radius: 50%; background: light-dark(oklch(0.96 0.008 75), oklch(0.18 0.015 260)); box-shadow: 0 4px 14px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; transition: box-shadow 0.2s; }
+.itu-medal-body:hover { box-shadow: 0 10px 24px oklch(0.50 0.16 250 / 0.3); }
+.itu-medal-svg { width: 68px; height: 68px; }
+.seal-rim-outer { fill: none; stroke: var(--border); stroke-width: 1.5; }
+.seal-rim-inner { fill: none; stroke: var(--border); stroke-width: 0.75; stroke-dasharray: 2 2; }
+.seal-text { font-family: var(--font-mono); font-size: 7.2px; font-weight: 700; fill: var(--text-muted); letter-spacing: 1.1px; }
+.seal-bee { fill: var(--accent); }
+.seal-roman { font-family: var(--font-mono); font-size: 6.5px; fill: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; }
+.seal-sheen { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; }
+@media print { .footer-seal-wrap { margin: 6pt 0; } .itu-medal-body { box-shadow: none !important; background: none !important; } .seal-rim-outer, .seal-rim-inner { stroke: #222 !important; } .seal-text, .seal-roman, .seal-bee { fill: #111 !important; } }

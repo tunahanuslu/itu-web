@@ -6,17 +6,15 @@
     <meta name="color-scheme" content="light dark">
     <title>{{PAGE_TITLE}}</title>
     <link rel="manifest" href="{{BASE_PATH}}manifest.webmanifest">
-    <link rel="icon" type="image/svg+xml" href="{{BASE_PATH}}assets/img/favicon.svg?v=2.7">
-    <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css?v=3.2">
+    <link rel="icon" type="image/svg+xml" href="{{BASE_PATH}}assets/img/favicon.svg?v=3.3">
+    <link rel="stylesheet" href="{{BASE_PATH}}assets/css/style.css?v=3.3">
     
-    <!-- OpenGraph & Twitter Sosyal Medya Önizleme Kartları -->
     <meta property="og:title" content="Yusuf Tunahan Uslu — İTÜ Web Alanı">
     <meta property="og:description" content="İstanbul Teknik Üniversitesi — Akıllı Tekstiller, E-Tekstil ve Linux Sistem Mimarisi Çalışma Masası.">
     <meta property="og:url" content="https://web.itu.edu.tr/usluy26/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
 
-    <!-- W3C Speculation Rules API (0 ms Algılanan Gecikme) -->
     <script type="speculationrules">
     {
       "prerender": [
@@ -28,7 +26,6 @@
     }
     </script>
 
-    <!-- Schema.org Semantik Web ve Yapay Zeka Veri Grafı (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -72,7 +69,7 @@
       ]
     }
     </script>
-    <script defer src="{{BASE_PATH}}assets/js/telemetry.js?v=1.0"></script>
+    <script defer src="{{BASE_PATH}}assets/js/telemetry.js?v=2.0"></script>
     <script defer src="{{BASE_PATH}}assets/js/loom.js?v=2.0"></script>
 </head>
 <body>
@@ -81,7 +78,17 @@
             <a href="{{BASE_PATH}}index.html" class="brand" aria-label="Yusuf Tunahan Ana Sayfa">
                 <span class="prompt">$</span><span class="brand-text">Yusuf Tunahan</span><span class="cursor">_</span>
             </a>
-            <div class="header-meta">İTÜ • Tekstil Mühendisliği</div>
+            <div class="header-meta">
+                <a href="https://www.itu.edu.tr" target="_blank" rel="noopener noreferrer" class="itu-header-badge" aria-label="İstanbul Teknik Üniversitesi">
+                    <svg class="itu-bee" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                        <path fill="currentColor" d="M12 2a2 2 0 0 1 2 2c0 .4-.1.8-.3 1.1l1.8 1.8A7 7 0 0 1 20 11v1h-2a5 5 0 0 0-4.5-4.9l-.5 2A3 3 0 0 1 12 9a3 3 0 0 1-1-0.1l-.5-2A5 5 0 0 0 6 12H4v-1a7 7 0 0 1 4.5-4.1l1.8-1.8A2 2 0 0 1 10 4a2 2 0 0 1 2-2zm0 8a2 2 0 0 1 2 2v6a2 2 0 0 1-4 0v-6a2 2 0 0 1 2-2zm-5 4a4 4 0 0 0 3 3.9v-2.1a2 2 0 0 1-1-1.8H7zm10 0h-2a2 2 0 0 1-1 1.8v2.1a4 4 0 0 0 3-3.9z"/>
+                    </svg>
+                    <span class="itu-acronym">İTÜ</span>
+                    <span class="itu-est">1773</span>
+                </a>
+                <span class="meta-sep">•</span>
+                <span>Tekstil Mühendisliği</span>
+            </div>
         </header>
 
         <main class="content">
@@ -96,6 +103,10 @@
                 <a href="https://web.itu.edu.tr/usluy26/">web.itu.edu.tr/usluy26</a>
                 <button type="button" class="hud-trigger" id="hud-toggle" aria-label="Donanım ve Ağ Telemetrisi">[telemetri]</button>
             </nav>
+
+            <!-- 3D Holografik İTÜ Colophon Madalyonu Yuvası -->
+            <div id="itu-seal-root" class="footer-seal-wrap"></div>
+
             <div class="footer-colophon">
                 {{YEAR}} © Yusuf Tunahan — Sıfır dış bağımlılık ve permacomputing ilkeleriyle üretilmiştir.
             </div>
