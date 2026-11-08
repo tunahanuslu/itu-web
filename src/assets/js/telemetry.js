@@ -102,3 +102,10 @@
         if (trigger) trigger.addEventListener('click', toggleHUD);
     });
 })();
+
+// Permacomputing PWA: Service Worker Kaydı
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
+    });
+}

@@ -30,7 +30,7 @@ def main():
         css_dist.write_text(min_css.strip(), encoding="utf-8")
 
     # 4. Kök Dosyaları Kopyala
-    for conf in [".htaccess", "robots.txt"]:
+    for conf in [".htaccess", "robots.txt", "sw.js", "manifest.webmanifest"]:
         if (SRC_DIR / conf).exists():
             shutil.copy(SRC_DIR / conf, DIST_DIR / conf)
 

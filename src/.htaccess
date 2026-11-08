@@ -1,59 +1,51 @@
 # ==============================================================================
-# İTÜ Web Alanı - Askeri Düzey Sunucu Sertleştirme ve Yüksek Performans
+# İTÜ Web Alanı - Askeri Düzey Sunucu Sertleştirme ve PWA Mimarisi
 # ==============================================================================
 
-# 1. Dizin Gezinmesini (Directory Listing) Kesin Olarak Kapat
 <IfModule mod_autoindex.c>
     Options -Indexes
 </IfModule>
 
-# 2. İTÜ NFS Depolama Kümesinde ETag Tutarlılığı (INode Bağımlılığını Kaldır)
 FileETag MTime Size
 
-# 3. GZIP / DEFLATE Sıkıştırması (Ağ Trafiğini %70-80 Azaltır)
+# PWA Manifest MIME Türü Standardı
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+</IfModule>
+
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
-    AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+    AddOutputFilterByType DEFLATE application/javascript application/json application/xml application/manifest+json
     AddOutputFilterByType DEFLATE image/svg+xml
     Header append Vary Accept-Encoding
 </IfModule>
 
-# 4. Güvenlik ve İzolasyon Başlıkları (Zero-Trust Security Headers)
 <IfModule mod_headers.c>
-    # Tıklama Korsanlığı (Clickjacking) Koruması
     Header set X-Frame-Options "SAMEORIGIN"
-    
-    # MIME Türü Sahteciliği (Sniffing) Koruması
     Header set X-Content-Type-Options "nosniff"
-    
-    # Gizlilik Odaklı Referrer Politikası
     Header set Referrer-Policy "strict-origin-when-cross-origin"
-    
-    # Donanım Yetkilerini Kapat
     Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
 
-    # Tarayıcı Süreç Bellek İzolasyonu (COOP & CORP)
     Header set Cross-Origin-Opener-Policy "same-origin"
     Header set Cross-Origin-Resource-Policy "same-origin"
     Header set X-Permitted-Cross-Domain-Policies "none"
 
-    # CSP Level 3: Sıfır Dış Kaynak, Tam İzolasyon
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self';"
+    # CSP Level 3: worker-src 'self' ile Service Worker zırhı
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self';"
 
-    # HTML Dosyaları: Asla önbelleğe alma (Değişiklikler anında yansısın)
-    <FilesMatch "\.(html|htm)$">
+    # HTML, Service Worker ve Manifest: Asla önbelleğe alma
+    <FilesMatch "\.(html|htm|webmanifest)$|^sw\.js$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
         Header set Pragma "no-cache"
         Header set Expires 0
     </FilesMatch>
 
-    # Statik Varlıklar (CSS, SVG, WOFF2, ICO): 1 Hafta Önbellekle
-    <FilesMatch "\.(css|svg|woff2|ico)$">
+    # Statik Varlıklar (CSS, SVG, WOFF2, ICO, diğer JS): 1 Hafta Önbellekle
+    <FilesMatch "\.(css|svg|woff2|ico)$|^telemetry\.js$|^loom\.js$">
         Header set Cache-Control "max-age=604800, public"
     </FilesMatch>
 </IfModule>
 
-# 5. Hassas Dosyalara Doğrudan Erişimi Yasakla (403 Forbidden)
 <FilesMatch "(^\.|\.(bak|config|sql|ini|log|sh|py|md)$)">
     <IfModule mod_authz_core.c>
         Require all denied
@@ -64,5 +56,4 @@ FileETag MTime Size
     </IfModule>
 </FilesMatch>
 
-# 6. Özel 404 Sayfası (Alt Dizin Uyumlu)
 ErrorDocument 404 /usluy26/404.html

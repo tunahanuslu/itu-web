@@ -46,6 +46,11 @@ def main():
     except Exception as e:
         print(f" [UYARI] Canlı sunucuya ulaşılamadı: {e}")
 
+    
+    # 5. PWA ve Çevrimdışı Kalkan (Service Worker) Denetimi
+    pwa_ok = (DIST / "sw.js").exists() and (DIST / "manifest.webmanifest").exists()
+    all_ok &= check("9. Permacomputing Çevrimdışı Kalkan (PWA/SW):", pwa_ok, "(Kurulu)")
+
     print(f"\n\033[1mSonuç: {'Tüm mimari standartlar %100 kusursuz!' if all_ok else 'Bazı denetimler başarısız oldu.'}\033[0m\n")
     sys.exit(0 if all_ok else 1)
 
