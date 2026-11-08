@@ -21,17 +21,16 @@ def main():
     if (SRC_DIR / "assets").exists():
         shutil.copytree(SRC_DIR / "assets", DIST_DIR / "assets")
 
-    # 3. Akıllı Derleme Zamanı CSS Minifier
+    # 3. İleri Düzey CSS Minifier
     css_dist = DIST_DIR / "assets" / "css" / "style.css"
     if css_dist.exists():
         raw_css = css_dist.read_text(encoding="utf-8")
         min_css = re.sub(r"/\*.*?\*/", "", raw_css, flags=re.DOTALL)
         min_css = re.sub(r"\s+", " ", min_css)
         min_css = re.sub(r"\s*([\{\}\:\;\,])\s*", r"\1", min_css)
-        # Standart mikro-optimizasyonlar
-        min_css = re.sub(r";\}", "}", min_css)  # Kapanış öncesi gereksiz noktalı virgülleri süz
-        min_css = re.sub(r"(?<=[\s:(,-])0\.(\d+)", r".\1", min_css)  # 0.85 -> .85
-        min_css = re.sub(r"\b0(px|rem|em|pt|%)\b", "0", min_css)  # 0px -> 0
+        min_css = re.sub(r";\}", "}", min_css)
+        min_css = re.sub(r"(?<=[\s:(,-])0\.(\d+)", r".\1", min_css)
+        min_css = re.sub(r"\b0(px|rem|em|pt|%)\b", "0", min_css)
         css_dist.write_text(min_css.strip(), encoding="utf-8")
 
     # 4. Kök Dosyaları Kopyala
@@ -39,7 +38,7 @@ def main():
         if (SRC_DIR / conf).exists():
             shutil.copy(SRC_DIR / conf, DIST_DIR / conf)
 
-    # 5. Sayfaları Derle, HTML, JSON-LD & Speculation Rules Minifier
+    # 5. Sayfaları Derle & Minify Et
     with open(SRC_DIR / "templates" / "base.html", "r", encoding="utf-8") as f:
         base_template = f.read()
 
@@ -48,10 +47,10 @@ def main():
         {"file": "404.html", "out": DIST_DIR / "404.html", "title": "404 — Yusuf Tunahan", "base": "./"},
     ]
 
-    def min_json_block(m, tag_type):
+    def min_json(m, tag):
         try:
-            data = json.loads(m.group(1))
-            return f'<script type="{tag_type}">{json.dumps(data, separators=(",", ":"))}</script>'
+            d = json.loads(m.group(1))
+            return f'<script type="{tag}">{json.dumps(d, separators=(",", ":"))}</script>'
         except Exception:
             return m.group(0)
 
@@ -65,11 +64,8 @@ def main():
         rendered = rendered.replace("{{BASE_PATH}}", p["base"])
         rendered = rendered.replace("{{YEAR}}", str(datetime.now().year))
 
-        # JSON-LD & Speculation Rules JSON Minifikasyonu
-        rendered = re.sub(r'<script type="application/ld\+json">(.*?)</script>', lambda m: min_json_block(m, 'application/ld+json'), rendered, flags=re.DOTALL)
-        rendered = re.sub(r'<script type="speculationrules">(.*?)</script>', lambda m: min_spec_rules(m) if "min_spec_rules" in locals() else min_json_block(m, 'speculationrules'), rendered, flags=re.DOTALL)
-
-        # HTML Minifikasyonu
+        rendered = re.sub(r'<script type="application/ld\+json">(.*?)</script>', lambda m: min_json(m, 'application/ld+json'), rendered, flags=re.DOTALL)
+        rendered = re.sub(r'<script type="speculationrules">(.*?)</script>', lambda m: min_json(m, 'speculationrules'), rendered, flags=re.DOTALL)
         rendered = re.sub(r"<!--(?!\s*\[if).*?-->", "", rendered, flags=re.DOTALL)
         rendered = re.sub(r">\s+<", "><", rendered)
         rendered = re.sub(r"[ \t]+", " ", rendered)

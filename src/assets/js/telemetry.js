@@ -89,29 +89,7 @@
         }
     }
 
-    document.addEventListener('keydown', (e) => {
-        if ((e.key === 'd' || e.key === 'D' || e.key === '~' || e.key === '`') && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
-            toggleHUD();
-        } else if (e.key === 'Escape' && isOpen) {
-            toggleHUD();
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const trigger = document.getElementById('hud-toggle');
-        if (trigger) trigger.addEventListener('click', toggleHUD);
-    });
-})();
-
-// Permacomputing PWA: Service Worker Kaydı
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
-    });
-}
-
-// 3D Holografik İTÜ 1773 Colophon Madalyonu Motoru
-(function() {
+    // 3D Holografik İTÜ 1773 Colophon Madalyonu (Yerel SVG Nitelikleriyle)
     function initMedal() {
         const root = document.getElementById('itu-seal-root');
         if (!root) return;
@@ -123,19 +101,19 @@ if ('serviceWorker' in navigator) {
                         <defs>
                             <path id="seal-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"/>
                         </defs>
-                        <circle cx="50" cy="50" r="47" class="seal-rim-outer"/>
-                        <circle cx="50" cy="50" r="43" class="seal-rim-inner"/>
-                        <text class="seal-text">
+                        <circle cx="50" cy="50" r="47" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+                        <circle cx="50" cy="50" r="43" fill="none" stroke="var(--border)" stroke-width="0.75" stroke-dasharray="2 2"/>
+                        <text font-family="var(--font-mono)" font-size="7.2px" font-weight="700" fill="var(--text-muted)" letter-spacing="1.1px">
                             <textPath href="#seal-path" startOffset="50%" text-anchor="middle">
                                 İSTANBUL TEKNİK ÜNİVERSİTESİ • 1773 •
                             </textPath>
                         </text>
                         <g transform="translate(38, 33) scale(1)">
-                            <path class="seal-bee" d="M12 2a2 2 0 0 1 2 2c0 .4-.1.8-.3 1.1l1.8 1.8A7 7 0 0 1 20 11v1h-2a5 5 0 0 0-4.5-4.9l-.5 2A3 3 0 0 1 12 9a3 3 0 0 1-1-0.1l-.5-2A5 5 0 0 0 6 12H4v-1a7 7 0 0 1 4.5-4.1l1.8-1.8A2 2 0 0 1 10 4a2 2 0 0 1 2-2zm0 8a2 2 0 0 1 2 2v6a2 2 0 0 1-4 0v-6a2 2 0 0 1 2-2zm-5 4a4 4 0 0 0 3 3.9v-2.1a2 2 0 0 1-1-1.8H7zm10 0h-2a2 2 0 0 1-1 1.8v2.1a4 4 0 0 0 3-3.9z"/>
+                            <path fill="var(--accent)" d="M12 2a2 2 0 0 1 2 2c0 .4-.1.8-.3 1.1l1.8 1.8A7 7 0 0 1 20 11v1h-2a5 5 0 0 0-4.5-4.9l-.5 2A3 3 0 0 1 12 9a3 3 0 0 1-1-0.1l-.5-2A5 5 0 0 0 6 12H4v-1a7 7 0 0 1 4.5-4.1l1.8-1.8A2 2 0 0 1 10 4a2 2 0 0 1 2-2zm0 8a2 2 0 0 1 2 2v6a2 2 0 0 1-4 0v-6a2 2 0 0 1 2-2zm-5 4a4 4 0 0 0 3 3.9v-2.1a2 2 0 0 1-1-1.8H7zm10 0h-2a2 2 0 0 1-1 1.8v2.1a4 4 0 0 0 3-3.9z"/>
                         </g>
-                        <text x="50" y="73" class="seal-roman" text-anchor="middle">MDCCLXXIII</text>
+                        <text x="50" y="73" font-family="var(--font-mono)" font-size="6.5px" fill="var(--text-muted)" font-weight="600" letter-spacing="0.5px" text-anchor="middle">MDCCLXXIII</text>
                     </svg>
-                    <div class="seal-sheen" id="seal-sheen"></div>
+                    <div class="seal-sheen" id="seal-sheen" style="position:absolute;inset:0;border-radius:50%;pointer-events:none;"></div>
                 </div>
             </a>
         `;
@@ -160,9 +138,26 @@ if ('serviceWorker' in navigator) {
         });
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMedal);
-    } else {
+    document.addEventListener('keydown', (e) => {
+        if ((e.key === 'd' || e.key === 'D' || e.key === '~' || e.key === '`') && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+            toggleHUD();
+        } else if (e.key === 'Escape' && isOpen) {
+            toggleHUD();
+        }
+    });
+
+    function initAll() {
+        const trigger = document.getElementById('hud-toggle');
+        if (trigger) trigger.addEventListener('click', toggleHUD);
         initMedal();
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+        initAll();
     }
 })();
