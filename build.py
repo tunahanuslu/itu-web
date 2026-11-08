@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import re
 import shutil
 from pathlib import Path
@@ -34,7 +35,7 @@ def main():
         if (SRC_DIR / conf).exists():
             shutil.copy(SRC_DIR / conf, DIST_DIR / conf)
 
-    # 5. Sayfaları Derle & HTML Minifier
+    # 5. Sayfaları Derle, HTML & JSON-LD Minifier
     with open(SRC_DIR / "templates" / "base.html", "r", encoding="utf-8") as f:
         base_template = f.read()
 
@@ -42,6 +43,13 @@ def main():
         {"file": "index.html", "out": DIST_DIR / "index.html", "title": "Yusuf Tunahan", "base": "./"},
         {"file": "404.html", "out": DIST_DIR / "404.html", "title": "404 — Yusuf Tunahan", "base": "./"},
     ]
+
+    def min_json_ld(m):
+        try:
+            data = json.loads(m.group(1))
+            return f'<script type="application/ld+json">{json.dumps(data, separators=(",", ":"))}</script>'
+        except Exception:
+            return m.group(0)
 
     for p in pages:
         with open(SRC_DIR / "pages" / p["file"], "r", encoding="utf-8") as f:
@@ -53,7 +61,8 @@ def main():
         rendered = rendered.replace("{{BASE_PATH}}", p["base"])
         rendered = rendered.replace("{{YEAR}}", str(datetime.now().year))
 
-        # HTML Minifier: Yorumları temizle ve etiket arası boşlukları süze
+        # JSON-LD ve HTML Minifikasyonu
+        rendered = re.sub(r'<script type="application/ld\+json">(.*?)</script>', min_json_ld, rendered, flags=re.DOTALL)
         rendered = re.sub(r"<!--(?!\s*\[if).*?-->", "", rendered, flags=re.DOTALL)
         rendered = re.sub(r">\s+<", "><", rendered)
         rendered = re.sub(r"[ \t]+", " ", rendered)
