@@ -97,7 +97,7 @@
         root.innerHTML = `
             <a href="https://www.itu.edu.tr" target="_blank" rel="noopener noreferrer" class="itu-medal" id="itu-medal" aria-label="İstanbul Teknik Üniversitesi 1773 Resmi Amblemi">
                 <div class="itu-medal-body">
-                    <img src="./assets/img/itu-emblem.svg" width="60" height="84" class="itu-medal-img" alt="İTÜ 1773 Resmi Amblemi">
+                    <img src="./assets/img/itu-emblem.svg" width="180" height="252" class="itu-medal-img" alt="İTÜ 1773 Resmi Amblemi">
                     <div class="seal-sheen" id="seal-sheen"></div>
                 </div>
             </a>
@@ -113,7 +113,7 @@
             const y = (e.clientY - rect.top) / rect.height - 0.5;
             medal.style.transform = `perspective(380px) rotateX(${-y * 26}deg) rotateY(${x * 26}deg) scale3d(1.05, 1.05, 1.05)`;
             if (sheen) {
-                sheen.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(255,255,255,0.3) 0%, transparent 60%)`;
+                sheen.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, oklch(0.92 0.16 85 / 0.5) 0%, oklch(0.78 0.14 75 / 0.15) 35%, transparent 65%)`;
             }
         });
 
