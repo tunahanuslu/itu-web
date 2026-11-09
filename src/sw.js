@@ -5,7 +5,7 @@ const ASSETS = [
     './404.html',
     './assets/css/style.css',
     './assets/img/favicon.svg',
-    './assets/img/itu-bee.svg',
+    './assets/img/itu-emblem.svg',
     './assets/js/telemetry.js',
     './assets/js/loom.js',
     './manifest.webmanifest'
