@@ -97,7 +97,7 @@
         root.innerHTML = `
             <a href="https://www.itu.edu.tr" target="_blank" rel="noopener noreferrer" class="itu-medal" id="itu-medal" aria-label="İstanbul Teknik Üniversitesi 1773 Resmi Amblemi">
                 <div class="itu-medal-body">
-                    <img src="./assets/img/itu-emblem.svg" width="180" height="252" class="itu-medal-img" alt="İTÜ 1773 Resmi Amblemi">
+                    <img src="./assets/img/itu-emblem.webp" width="180" height="252" class="itu-medal-img" alt="İTÜ 1773 Resmi Amblemi">
                     <div class="seal-sheen" id="seal-sheen"></div>
                 </div>
             </a>
